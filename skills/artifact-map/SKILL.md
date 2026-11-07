@@ -1,6 +1,11 @@
+---
+name: artifact-map
+description: The single authority on where a project's agent-facing knowledge lives (AGENTS.md, CODING_STANDARDS.md, docs/decisions, docs/learnings, docs/postmortems, work/), who reads it, and when it leaves, with templates and CI gate scripts. Use before creating, moving, or deleting any of these files, and when setting up a project for this skill pack.
+---
+
 # Artifact map
 
-The single authority for where every project artifact lives, who reads it, and when it leaves. Every skill in this pack writes only to the locations named here. When a skill and this file disagree, fix one so they match.
+Every skill in this pack writes only to the locations named here. When a skill and this map disagree, fix one so they match. Other skills reach this skill's templates and scripts at `../artifact-map/`.
 
 ## Two rules above all others
 
@@ -50,15 +55,52 @@ Write a postmortem only for an incident: production or user impact, or a failure
 
 - Create `work/<ticket>/` only for a task that spans sessions or agents, or whose plan needs review before code. A task one session can finish needs no `work/` directory.
 - `plan.md` carries the ticket's status in its front matter: `shaping`, `building`, `verifying`, `reviewing`, `closing`. Each stage skill reads it on entry and updates it on exit.
-- Before the ticket's last PR merges, the close skill distills the directory: decisions to L3, lessons through the cheapest-form ladder, the rest deleted. The PR description lists what went where.
+- Before the ticket's last PR merges, `close-ticket` distills the directory: decisions to L3, lessons through the cheapest-form ladder, the rest deleted. The PR description lists what went where.
 - `check_work.py` fails CI when an entry in `work/` is not a ticket directory with a valid `plan.md`, when a ticket is left in `closing` (the close step deletes the directory in the same change), or, if the project sets `--max-idle-days`, when a ticket has gone without a commit for too long.
 
 ## Scope: pack versus project
 
-| Belongs to the pack (this repository) | Belongs to each project |
+| Belongs to the pack | Belongs to each project |
 | --- | --- |
 | Workflow skills and their pass criteria | `AGENTS.md`, `CODING_STANDARDS.md`, lint and CI configuration |
 | This map, principles, subagent guidance, templates | `docs/` content and `work/` |
 | Generic gate scripts | `.agents/<skill>/` adapters and living logs |
 
 A project adapter decides **how to run** something in that project; the pack skill decides **what counts as done**. A project rule that shows up in a second project moves up into the pack. A pack rule that projects keep overriding moves down.
+
+## Templates
+
+| Artifact | Template | Written by |
+| --- | --- | --- |
+| Decision record | [templates/decision.md](templates/decision.md) | `decision-record` |
+| Plan for work in flight | [templates/plan.md](templates/plan.md) | the shaping stage |
+| Learning | [templates/learning.md](templates/learning.md) | `close-ticket` |
+| Postmortem | [templates/postmortem.md](templates/postmortem.md) | by hand, after an incident |
+| Project `AGENTS.md` | [templates/project-AGENTS.md](templates/project-AGENTS.md) | setup, below |
+
+## Gate scripts
+
+Standard-library Python, run from the project root. Each prints one line per problem and exits 1 on failure.
+
+| Script | Checks |
+| --- | --- |
+| `scripts/gates/check_decisions.py` | Decision record paths, header and `Status:` line, required and forbidden sections, relative links |
+| `scripts/gates/check_work.py` | `work/` holds only ticket directories with a valid `plan.md` status, none left in `closing`; `--max-idle-days N` also fails idle tickets |
+| `scripts/gates/check_agents_budget.py` | `AGENTS.md` word count, `--max-words` (default 600) |
+
+## Set up a project
+
+Do each step only if the project does not already have it.
+
+1. Install the pack with `npx skills add Sailfishc/skills` and commit `.agents/skills/` together with `skills-lock.json`.
+2. Create `AGENTS.md` from the project template, filling in the real commands. Make `CLAUDE.md` contain only `@AGENTS.md`.
+3. Create directories lazily, when their first file is written. Never commit empty placeholders.
+4. Add the three gates to the project's CI, for example:
+
+   ```yaml
+   - run: python3 .agents/skills/artifact-map/scripts/gates/check_decisions.py
+   - run: python3 .agents/skills/artifact-map/scripts/gates/check_work.py
+   - run: python3 .agents/skills/artifact-map/scripts/gates/check_agents_budget.py
+   ```
+
+5. Run the three gates locally and confirm they pass before handing back.

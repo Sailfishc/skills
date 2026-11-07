@@ -9,7 +9,7 @@ description: Close a ticket by hand. Distill work/<ticket>/ into decision record
 
 **Done:** `work/<ticket>/` is deleted, the gates pass, and the PR description carries a "Distilled from" block listing where every item went. If nothing was worth keeping, the block says so.
 
-Read the [artifact map](../project-artifacts/references/artifact-map.md) first. This skill needs `project-artifacts` and `decision-record` installed beside it. It runs only when someone invokes it.
+Read the [artifact map](../artifact-map/SKILL.md) first. This skill needs `artifact-map` and `decision-record` installed beside it. It runs only when someone invokes it.
 
 ## 1. Find the ticket
 
@@ -58,7 +58,7 @@ Handle one lesson at a time. Try these forms in order and take the first that ho
 1. **Remove the second way.** The mistake was possible because two ways to do the same thing exist. Consolidating them changes product code: report it as follow-up work, and continue down the list for what can be held now.
 2. **A check.** A test, type, or lint rule the project already runs can detect it, and its failure says what to fix. Add it, then prove it twice: it passes on the current tree, and it fails on the defect in a throwaway copy of the tree. Never put the defect in the working tree. If you cannot show both, remove the check and move to the next form.
 3. **A standard.** An author must avoid it while writing and a reviewer can see it in a diff, and no check can hold it. Add one condition to the `CODING_STANDARDS.md` nearest the affected code, in that file's style. Only add a standard when the defect appeared in a review finding, a fix commit, or this ticket's evidence. If the project has no `CODING_STANDARDS.md`, do not create one; write a learning instead.
-4. **A learning.** Reasoning that code, tests, and standards cannot carry. Write it only if it passes the counterfactual: if this document disappeared, would someone reading the final code still repeat the mistake or redo the investigation? Search `docs/learnings/` first and update an existing learning rather than adding a near-duplicate. Use the [learning template](../project-artifacts/templates/learning.md).
+4. **A learning.** Reasoning that code, tests, and standards cannot carry. Write it only if it passes the counterfactual: if this document disappeared, would someone reading the final code still repeat the mistake or redo the investigation? Search `docs/learnings/` first and update an existing learning rather than adding a near-duplicate. Use the [learning template](../artifact-map/templates/learning.md).
 5. **A pointer.** Navigation findings become one line in `AGENTS.md` or `docs/architecture.md` that links to the owning file. Add to `AGENTS.md` only when every session needs it.
 
 If a check or standard already states the lesson, the lesson was not new: write nothing and note which file holds it.
@@ -68,9 +68,9 @@ If a check or standard already states the lesson, the lesson was not new: write 
 Delete `work/<ticket>/`. Then run the gates from the project root:
 
 ```sh
-python3 .agents/skills/project-artifacts/scripts/gates/check_decisions.py
-python3 .agents/skills/project-artifacts/scripts/gates/check_work.py
-python3 .agents/skills/project-artifacts/scripts/gates/check_agents_budget.py
+python3 .agents/skills/artifact-map/scripts/gates/check_decisions.py
+python3 .agents/skills/artifact-map/scripts/gates/check_work.py
+python3 .agents/skills/artifact-map/scripts/gates/check_agents_budget.py
 ```
 
 Fix every failure before handing back. Run the tests for any check you added.

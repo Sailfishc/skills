@@ -6,13 +6,13 @@ Agent skills for long-lived projects: shape the work, build it, verify it, revie
 npx skills add Sailfishc/skills
 ```
 
-Then ask your agent to set up the project with the `project-artifacts` skill.
+Then ask your agent to set up the project with the `artifact-map` skill.
 
 ## Skills
 
 | Skill | Status | What it does |
 | --- | --- | --- |
-| `project-artifacts` | ready | The artifact map, templates, and CI gate scripts every other skill builds on |
+| `artifact-map` | ready | The artifact map, templates, and CI gate scripts every other skill builds on |
 | `decision-record` | ready | Propose, accept, reject, supersede, archive, or correct decision records |
 | `close-ticket` | ready | Distill `work/<ticket>/` and run an evidence-based retrospective, by hand |
 | `shape-work` | planned | Brainstorm, decide, and plan, sized to the work; writes acceptance checks |
@@ -21,11 +21,11 @@ Then ask your agent to set up the project with the `project-artifacts` skill.
 | `review-change` | planned | Review a diff against its plan and the project's `CODING_STANDARDS.md` |
 | `tend-knowledge` | planned | Periodically refresh learnings, archive decisions, and trim `AGENTS.md` |
 
-Start with [the artifact map](skills/project-artifacts/references/artifact-map.md). This repository's own choices are in [docs/decisions/](docs/decisions/).
+Start with [the artifact map](skills/artifact-map/SKILL.md). This repository's own choices are in [docs/decisions/](docs/decisions/).
 
 ## Development
 
 ```sh
 python3 -m unittest discover -s tests
-python3 skills/project-artifacts/scripts/gates/check_decisions.py
+python3 skills/artifact-map/scripts/gates/check_decisions.py
 ```

@@ -6,7 +6,7 @@ import subprocess
 import tempfile
 import unittest
 
-GATES = os.path.join(os.path.dirname(__file__), "..", "skills", "project-artifacts", "scripts", "gates")
+GATES = os.path.join(os.path.dirname(__file__), "..", "skills", "artifact-map", "scripts", "gates")
 
 
 def load(name):

@@ -18,8 +18,8 @@ jobs:
       - name: Gate tests
         run: python3 -m unittest discover -s tests
       - name: Decision records
-        run: python3 skills/project-artifacts/scripts/gates/check_decisions.py
+        run: python3 skills/artifact-map/scripts/gates/check_decisions.py
       - name: Work directory
-        run: python3 skills/project-artifacts/scripts/gates/check_work.py
+        run: python3 skills/artifact-map/scripts/gates/check_work.py
       - name: AGENTS.md budget
-        run: python3 skills/project-artifacts/scripts/gates/check_agents_budget.py
+        run: python3 skills/artifact-map/scripts/gates/check_agents_budget.py

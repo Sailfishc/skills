@@ -9,7 +9,7 @@ description: Propose, accept, reject, supersede, archive, or correct a decision 
 
 **Done:** the record is written or moved, every inbound link resolves, the gate passes, and you have reported one line naming the record and what changed.
 
-Read the [decision lifecycle](../project-artifacts/references/artifact-map.md#decision-lifecycle) and the [template](../project-artifacts/templates/decision.md) first. This skill needs the `project-artifacts` skill installed beside it.
+Read the [decision lifecycle](../artifact-map/SKILL.md#decision-lifecycle) and the [template](../artifact-map/templates/decision.md) first. This skill needs the `artifact-map` skill installed beside it.
 
 ## 1. Pick the job
 
@@ -61,7 +61,7 @@ Per job:
 Find inbound links to any moved or deleted record with a repository search for its file name, and fix them. Then run:
 
 ```sh
-python3 .agents/skills/project-artifacts/scripts/gates/check_decisions.py
+python3 .agents/skills/artifact-map/scripts/gates/check_decisions.py
 ```
 
 Adjust the path if the pack is installed elsewhere. Fix every problem it reports before you hand back.
