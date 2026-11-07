@@ -8,7 +8,7 @@ Projects need a durable record of why a choice was made and what it beat. The ma
 
 ## Decision
 
-Decisions live in `docs/decisions/{proposed,accepted,rejected,archived}/<class>/yyyy-mm-dd-<slug>.md`, with the lifecycle in the path and a `Status:` line that matches it. A proposed record is the RFC; on acceptance it is rewritten into a present-tense Decision, and its facts are kept current in the same change that moves them. A changed decision gets a new record, cross-linked to the old one. Archived records are frozen and never current authority. Admission uses three tests: hard to reverse, surprising without context, a real trade-off. Alternatives are mandatory. Records are short, single-language (English), and unnumbered. The rules live in [the artifact map](../../../../references/artifact-map.md#decision-lifecycle).
+Decisions live in `docs/decisions/{proposed,accepted,rejected,archived}/<class>/yyyy-mm-dd-<slug>.md`, with the lifecycle in the path and a `Status:` line that matches it. A proposed record is the RFC; on acceptance it is rewritten into a present-tense Decision, and its facts are kept current in the same change that moves them. A changed decision gets a new record, cross-linked to the old one. Archived records are frozen and never current authority. Admission uses three tests: hard to reverse, surprising without context, a real trade-off. Alternatives are mandatory. Records are short, single-language (English), and unnumbered. The rules live in [the artifact map](../../../../skills/project-artifacts/references/artifact-map.md#decision-lifecycle), and `check_decisions.py` in the same skill checks paths, status lines, and sections.
 
 ## Alternatives considered
 

@@ -2,25 +2,30 @@
 
 Agent skills for long-lived projects: shape the work, build it, verify it, review it, close it, and keep the project's knowledge from rotting.
 
-Status: foundation only. The artifact map, templates, and first decisions are in place; the skills come next.
+```sh
+npx skills add Sailfishc/skills
+```
 
-## The loop
+Then ask your agent to set up the project with the `project-artifacts` skill.
 
-| Stage | Skill (planned) | Writes to |
+## Skills
+
+| Skill | Status | What it does |
 | --- | --- | --- |
-| Shape | `shape` | `docs/decisions/proposed/`, `work/<ticket>/plan.md` |
-| Build | `build` | code, tests, plan status |
-| Verify | `verify` | `.agents/verify/` adapter, local evidence report |
-| Review | `review` | findings routed to lint, `CODING_STANDARDS.md`, or learnings |
-| Close (manual) | `close` | distills `work/<ticket>/` and runs the retrospective |
-| Tend (periodic) | `tend` | refreshes learnings, archives decisions, trims `AGENTS.md` |
+| `project-artifacts` | ready | The artifact map, templates, and CI gate scripts every other skill builds on |
+| `decision-record` | ready | Propose, accept, reject, supersede, archive, or correct decision records |
+| `close-ticket` | ready | Distill `work/<ticket>/` and run an evidence-based retrospective, by hand |
+| `shape-work` | planned | Brainstorm, decide, and plan, sized to the work; writes acceptance checks |
+| `build-work` | planned | Implement in verifiable units and keep the plan's status current |
+| `verify-delivery` | planned | Prove acceptance checks on the real product, with evidence |
+| `review-change` | planned | Review a diff against its plan and the project's `CODING_STANDARDS.md` |
+| `tend-knowledge` | planned | Periodically refresh learnings, archive decisions, and trim `AGENTS.md` |
 
-## Layout
+Start with [the artifact map](skills/project-artifacts/references/artifact-map.md). This repository's own choices are in [docs/decisions/](docs/decisions/).
 
+## Development
+
+```sh
+python3 -m unittest discover -s tests
+python3 skills/project-artifacts/scripts/gates/check_decisions.py
 ```
-references/   artifact-map.md and, later, principles, subagent guidance, harness mappings
-templates/    decision, plan, learning, postmortem, project AGENTS.md
-docs/         this repository's own decisions
-```
-
-Start with [references/artifact-map.md](references/artifact-map.md).

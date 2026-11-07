@@ -11,7 +11,7 @@ The single authority for where every project artifact lives, who reads it, and w
 
 | Layer | Artifact | Path | Reader and moment | Lifecycle |
 | --- | --- | --- | --- | --- |
-| L0 Enforced | Tests, types, lint rules, CI gates | the code, CI config, `scripts/gates/` | Machines, on every change | Kept green. The target form for every lesson that can be checked |
+| L0 Enforced | Tests, types, lint rules, CI gates | the code, CI config, this skill's `scripts/gates/` | Machines, on every change | Kept green. The target form for every lesson that can be checked |
 | L1 Standing | `AGENTS.md` | repo root (`CLAUDE.md` contains `@AGENTS.md`) | Every agent session | Current state. Word budget. Standing orders and pointers only |
 | L2 Situational | `CODING_STANDARDS.md` | repo root | The reviewer, at review time only | Current state. Judgement rules no check can hold |
 | | `architecture.md` | `docs/` | Before changing structure | Current state. A map, not rationale |
@@ -51,7 +51,7 @@ Write a postmortem only for an incident: production or user impact, or a failure
 - Create `work/<ticket>/` only for a task that spans sessions or agents, or whose plan needs review before code. A task one session can finish needs no `work/` directory.
 - `plan.md` carries the ticket's status in its front matter: `shaping`, `building`, `verifying`, `reviewing`, `closing`. Each stage skill reads it on entry and updates it on exit.
 - Before the ticket's last PR merges, the close skill distills the directory: decisions to L3, lessons through the cheapest-form ladder, the rest deleted. The PR description lists what went where.
-- A CI gate fails when a merged `work/<ticket>/` still has content.
+- `check_work.py` fails CI when an entry in `work/` is not a ticket directory with a valid `plan.md`, when a ticket is left in `closing` (the close step deletes the directory in the same change), or, if the project sets `--max-idle-days`, when a ticket has gone without a commit for too long.
 
 ## Scope: pack versus project
 

@@ -8,7 +8,7 @@ The team uses more than one agent harness. Each harness supports a different set
 
 ## Decision
 
-The pack is installed with `npx skills add Sailfishc/skills`. Skills use only portable features: `SKILL.md`, reference files, and scripts. No hooks, subagent manifests, or harness-specific plugin files. Harness differences, such as how to pick a model for a subagent, live in `references/harness/<harness>.md`. Rules that must always hold are enforced by gate scripts in `scripts/gates/` that each project's CI runs. Projects commit the installed skills under `.agents/skills/` and symlink each harness's skills directory to it, so the skill version is the git commit and every harness sees the same one.
+The pack is installed with `npx skills add Sailfishc/skills`. Skills use only portable features: `SKILL.md`, reference files, and scripts. No hooks, subagent manifests, or harness-specific plugin files. The CLI installs only skill directories, so material shared by several skills (the artifact map, templates, gate scripts) lives inside the `project-artifacts` skill, and harness differences, such as how to pick a model for a subagent, will live there too. Rules that must always hold are enforced by gate scripts in `project-artifacts/scripts/gates/` that each project's CI runs. Projects commit the installed skills under `.agents/skills/` together with the CLI's `skills-lock.json`; the CLI links each harness's skills directory to that canonical copy, so every harness sees the same version.
 
 ## Alternatives considered
 
@@ -16,7 +16,7 @@ The pack is installed with `npx skills add Sailfishc/skills`. Skills use only po
 
 **Separate builds per harness (Compound Engineering's converter).** Supports native features everywhere, at the cost of a converter and writer per target. Too much machinery for this pack.
 
-**Relying on the skills CLI alone for version pinning.** Not verified to pin versions; committing the installed copy pins them regardless.
+**Relying on the lock file alone, with installed skills untracked.** `skills-lock.json` records each skill's source and content hash and can restore them, but a restore needs the network and the CLI. Committing the installed copy as well lets any agent read the exact skill text from the checkout.
 
 ## Consequences
 

@@ -8,7 +8,7 @@ Brainstorms, plans, and handoffs are needed while a ticket is open, but kept for
 
 ## Decision
 
-Work that spans sessions or agents, or whose plan needs review before code, gets `work/<ticket>/plan.md` in the repository. The plan's front matter carries the ticket status (`shaping`, `building`, `verifying`, `reviewing`, `closing`); status is not synced to an issue tracker. Before the ticket's last PR merges, the close skill distills the directory into decisions, checks, standards, or learnings, deletes the rest, and lists what went where in the PR description. A CI gate fails on a merged, non-empty `work/<ticket>/`. Directories are per ticket, not per branch, so one ticket can span stacked PRs.
+Work that spans sessions or agents, or whose plan needs review before code, gets `work/<ticket>/plan.md` in the repository. The plan's front matter carries the ticket status (`shaping`, `building`, `verifying`, `reviewing`, `closing`); status is not synced to an issue tracker. Before the ticket's last PR merges, the close skill distills the directory into decisions, checks, standards, or learnings, deletes the rest, and lists what went where in the PR description. The `check_work.py` gate fails CI on a malformed ticket directory, on a ticket left in `closing`, and, when a project sets an idle limit, on a ticket with no recent commit. Whether a ticket is truly finished cannot be checked mechanically, so the gate catches incomplete closes and abandoned tickets rather than proving every ticket was distilled. Directories are per ticket, not per branch, so one ticket can span stacked PRs.
 
 ## Alternatives considered
 
