@@ -1,0 +1,6 @@
+interface:
+  display_name: "Shape Work"
+  short_description: "Scout, decide, and size a plan before code"
+  default_prompt: "Run $shape-work on this task before editing any files."
+policy:
+  allow_implicit_invocation: true

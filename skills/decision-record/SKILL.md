@@ -23,6 +23,8 @@ Read the [decision lifecycle](../artifact-map/SKILL.md#decision-lifecycle) and t
 | A change moves a path, name, or default an accepted record states | **Correct** the facts in place |
 | An accepted record no longer guides any future change | **Archive**, or delete it if it only recorded a small or mechanical change |
 
+- **Done when:** exactly one job is named.
+
 ## 2. Check admission (propose and accept only)
 
 Write a record only when all three hold. Otherwise write nothing and say which test failed.
@@ -30,6 +32,8 @@ Write a record only when all three hold. Otherwise write nothing and say which t
 1. **Hard to reverse:** changing course later costs real work, data migration, or broken users.
 2. **Surprising without context:** a future reader would ask "why did they do it this way?"
 3. **A real trade-off:** there were genuine alternatives and this one was picked for stated reasons.
+
+- **Done when:** all three tests pass, or the failing test is reported and nothing is written.
 
 ## 3. Search for overlap
 
@@ -39,6 +43,8 @@ Search `docs/decisions/` (all lifecycles except `archived/`) for the same decisi
 - A new record fully replaces an accepted one: archive the old one in this change, or delete it if the new record preserves every reason, alternative, and consequence it held.
 - A new record replaces part of an accepted one: keep both, link each to the other, and correct any fact in the old one that is no longer true.
 - A rejected record covers the idea being proposed: read why it lost. Propose it again only with a new reason, and link the rejected record.
+
+- **Done when:** the search terms were run and every overlapping record is either the one being updated or named with how it is handled.
 
 ## 4. Write
 
@@ -56,6 +62,8 @@ Per job:
 - **Archive:** `git mv` to `archived/<class>/`, keep `Status: accepted`, insert `Archived: yyyy-mm-dd` as the fourth line, and change nothing else. From then on the file is frozen and is never cited as current behavior.
 - **Delete:** remove the file and repair or remove every inbound link.
 
+- **Done when:** the record sits in the folder its job requires and every alternative it lists was actually considered.
+
 ## 5. Validate
 
 Find inbound links to any moved or deleted record with a repository search for its file name, and fix them. Then run:
@@ -65,6 +73,8 @@ python3 .agents/skills/artifact-map/scripts/gates/check_decisions.py
 ```
 
 Adjust the path if the pack is installed elsewhere. Fix every problem it reports before you hand back.
+
+- **Done when:** no inbound link points at a moved or deleted path and the gate reports 0 problems.
 
 ## 6. Report
 

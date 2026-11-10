@@ -17,11 +17,24 @@ The close skill distills this directory and deletes it before the ticket's last 
 
 The outcome, in the user's terms.
 
+## Context
+
+What the scout found, every claim with a `file:line` or config entry.
+
+- Change: <symbols to change, and callers whose contract depends on them>
+- Mirror: <local patterns to copy: error handling, test style>
+- Invariants: <non-obvious rules the change must keep>
+- Verify with: <test, typecheck, lint commands from project config>
+
+## Out of scope
+
+Things a reader might expect this work to include, and why it does not.
+
 ## Units
 
-Ordered units of work. Each ends in a check that proves it.
+Ordered units of work. Each ends in a check that proves it. `build-work` ticks a unit only after its proof passes.
 
-1. <unit> — proved by: <test, command, or observation>
+- [ ] <unit> — proved by: <test, command, or observation>
 
 ## Acceptance checks
 

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Close Ticket"
+  short_description: "Distill work/<ticket>/ and run an evidence-based retro"
+  default_prompt: "Run $close-ticket for the current ticket."
+policy:
+  allow_implicit_invocation: false

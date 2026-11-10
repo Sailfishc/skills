@@ -68,12 +68,16 @@ Write a postmortem only for an incident: production or user impact, or a failure
 
 A project adapter decides **how to run** something in that project; the pack skill decides **what counts as done**. A project rule that shows up in a second project moves up into the pack. A pack rule that projects keep overriding moves down.
 
+## Shared references
+
+- [references/principles.md](references/principles.md): judgment principles grouped by stage. Stage skills link the section for their step.
+
 ## Templates
 
 | Artifact | Template | Written by |
 | --- | --- | --- |
 | Decision record | [templates/decision.md](templates/decision.md) | `decision-record` |
-| Plan for work in flight | [templates/plan.md](templates/plan.md) | the shaping stage |
+| Plan for work in flight | [templates/plan.md](templates/plan.md) | `shape-work`, then `build-work` |
 | Learning | [templates/learning.md](templates/learning.md) | `close-ticket` |
 | Postmortem | [templates/postmortem.md](templates/postmortem.md) | by hand, after an incident |
 | Project `AGENTS.md` | [templates/project-AGENTS.md](templates/project-AGENTS.md) | setup, below |

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Artifact Map"
+  short_description: "Where project knowledge lives, with templates and CI gates"
+policy:
+  allow_implicit_invocation: true

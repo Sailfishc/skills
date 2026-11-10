@@ -1,0 +1,5 @@
+interface:
+  display_name: "Build Work"
+  short_description: "Surgical red-green implementation, reconciled to Done or Blocked"
+policy:
+  allow_implicit_invocation: true

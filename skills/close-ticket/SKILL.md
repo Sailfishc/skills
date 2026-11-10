@@ -1,6 +1,7 @@
 ---
 name: close-ticket
-description: Close a ticket by hand. Distill work/<ticket>/ into decision records, checks, coding standards, or learnings, delete the rest, and run a short evidence-based retrospective on what made the work harder than it needed to be. Use when the user asks to close, wrap up, distill, or retro a ticket, or before the last PR of a ticket merges.
+description: Close a ticket by hand. Distill work/<ticket>/ into decision records, checks, coding standards, or learnings, delete the rest, and run a short evidence-based retrospective on what made the work harder than it needed to be. Runs only when the user asks to close, wrap up, distill, or retro a ticket.
+disable-model-invocation: true
 ---
 
 # Close ticket
@@ -19,6 +20,8 @@ If more PRs are still planned for this ticket, stop: close runs with the ticket'
 
 Set `status: closing` in `plan.md` while you work. Never commit that state: this run ends by deleting the directory.
 
+- **Done when:** one ticket directory is named, its plan says `closing`, and no further PR is planned for the ticket.
+
 ## 2. Sort every item
 
 Read every file in `work/<ticket>/`. Sort each distinct item (a choice, a finding, a note, a check) into one bucket:
@@ -26,15 +29,19 @@ Read every file in `work/<ticket>/`. Sort each distinct item (a choice, a findin
 | Bucket | Examples | Goes to |
 | --- | --- | --- |
 | Decision | A choice between real alternatives | Step 3 |
-| Lesson | A mistake, a surprise, a method that saved time | Step 4 |
+| Lesson | A mistake, a surprise, a method that saved time | Step 5 |
 | Spent | Plan steps that were done, handoff notes, open questions that were answered, logs | Deleted |
 | Unfinished | Work that is still wanted but is not part of this ticket | A new ticket, or the user decides |
 
 An item already fully explained by the final code, tests, or existing docs is Spent.
 
+- **Done when:** every item in every file has exactly one bucket.
+
 ## 3. Settle decisions
 
 Use the `decision-record` skill for each Decision item. A proposed record this ticket shipped is accepted and rewritten. A choice made during the work that passes admission gets a record. Plan text that only restates a decision is Spent.
+
+- **Done when:** every Decision item is an accepted or proposed record that passes `check_decisions.py`, or is reclassified as Spent with the reason.
 
 ## 4. Retrospective
 
@@ -51,6 +58,8 @@ Every finding cites its evidence: the command, the failed run, the review commen
 
 Each finding becomes a Lesson for step 5.
 
+- **Done when:** every finding cites evidence, or the retrospective states "no findings".
+
 ## 5. Put each lesson in its cheapest durable form
 
 Handle one lesson at a time. Try these forms in order and take the first that holds:
@@ -63,6 +72,8 @@ Handle one lesson at a time. Try these forms in order and take the first that ho
 
 If a check or standard already states the lesson, the lesson was not new: write nothing and note which file holds it.
 
+- **Done when:** every Lesson has a destination (follow-up, check, standard, learning, pointer, or already held), and every added check was shown to pass on the tree and fail on the defect.
+
 ## 6. Delete and verify
 
 Delete `work/<ticket>/`. Then run the gates from the project root:
@@ -74,6 +85,8 @@ python3 .agents/skills/artifact-map/scripts/gates/check_agents_budget.py
 ```
 
 Fix every failure before handing back. Run the tests for any check you added.
+
+- **Done when:** `work/<ticket>/` no longer exists and all three gates and the added tests pass.
 
 ## 7. Report
 
@@ -91,3 +104,5 @@ Retrospective: <one line per finding with its evidence, or "no findings">
 ```
 
 Leave committing to the user's normal flow unless they ask you to commit.
+
+- **Done when:** the block lists every item from step 2 except Spent ones, and names the deleted files.

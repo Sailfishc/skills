@@ -1,0 +1,5 @@
+interface:
+  display_name: "Decision Record"
+  short_description: "Propose, accept, supersede, or archive decision records"
+policy:
+  allow_implicit_invocation: true
