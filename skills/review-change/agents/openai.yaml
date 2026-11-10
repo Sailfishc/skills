@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Change"
+  short_description: "Independent diff review: intent, correctness, standards, minimalism"
+  default_prompt: "Run $review-change against the current diff."
+policy:
+  allow_implicit_invocation: true

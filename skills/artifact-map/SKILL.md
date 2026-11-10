@@ -71,6 +71,7 @@ A project adapter decides **how to run** something in that project; the pack ski
 ## Shared references
 
 - [references/principles.md](references/principles.md): judgment principles grouped by stage. Stage skills link the section for their step.
+- [references/subagents.md](references/subagents.md): when and how skills dispatch subagents, including the rule for work that must run in a separate context.
 
 ## Templates
 

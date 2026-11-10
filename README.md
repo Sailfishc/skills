@@ -18,7 +18,7 @@ Then ask your agent to set up the project with the `artifact-map` skill.
 | `shape-work` | ready | Scout with a bounded search, settle choices, and size the plan to the work; writes acceptance checks |
 | `build-work` | ready | Surgical red-green implementation; reconciles every task to Done or Blocked |
 | `verify-delivery` | planned | Prove acceptance checks on the real product, with evidence |
-| `review-change` | planned | Review a diff against its plan and the project's `CODING_STANDARDS.md` |
+| `review-change` | ready | Independent review of a diff for intent, correctness, standards, and minimalism |
 | `tend-knowledge` | planned | Periodically refresh learnings, archive decisions, and trim `AGENTS.md` |
 
 Start with [the artifact map](skills/artifact-map/SKILL.md). This repository's own choices are in [docs/decisions/](docs/decisions/).
